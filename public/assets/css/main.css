@@ -1,0 +1,20 @@
+a.none {
+    text-decoration: none;
+}
+
+.btn.dropdown-toggle::after {
+    display: none !important;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: gray;
+}
+
+a.iconrotate90:hover .fas {
+    transition: 0.9s;
+    transform: rotate(90deg);
+}
