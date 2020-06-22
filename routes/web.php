@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@main')->name('home');
+
+
+
+Route::get('/rejestracja', 'HomeController@main')->name('page_auth_register');
+Route::any('/wyloguj', 'AuthorizationController@logout')->name('logout');
+
+Route::prefix('system')->group(function () {
+
+	Route::prefix('auth')->group(function () {
+		Route::post('signIn', 'AuthorizationController@signIn');
+    	Route::post('signUp', 'AuthorizationController@signUp');
+	});;
 });
