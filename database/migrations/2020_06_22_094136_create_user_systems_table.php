@@ -5,7 +5,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUserSystemsTable extends Migration
-{
+{    
+
+    private $tableName = 'users_system';
+    
     /**
      * Run the migrations.
      *
@@ -13,7 +16,10 @@ class CreateUserSystemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_system', function (Blueprint $table) {
+        if (Schema::hasTable($this->tableName))
+            return;
+        
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             
@@ -34,6 +40,6 @@ class CreateUserSystemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_system');
+        Schema::dropIfExists($this->tableName);
     }
 }

@@ -4,10 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserHistoriesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
 
-    private $tableName = 'users_histories';
+    private $tableName = 'categories';
     
     /**
      * Run the migrations.
@@ -21,13 +21,12 @@ class CreateUserHistoriesTable extends Migration
         
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('type', 32);
-            $table->text('data');
-            $table->ipAddress('ip');
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('name', 32);
+            $table->mediumInteger('orderID');
+            $table->integer('overcategory');
+            $table->tinyInteger('active');
+            $table->tinyInteger('visible');
+            $table->string('icon', 24);
         });
     }
 

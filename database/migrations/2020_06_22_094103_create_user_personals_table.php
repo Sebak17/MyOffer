@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUserPersonalsTable extends Migration
 {
+
+    private $tableName = 'users_personal';
+    
     /**
      * Run the migrations.
      *
@@ -13,7 +16,10 @@ class CreateUserPersonalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_personal', function (Blueprint $table) {
+        if (Schema::hasTable($this->tableName))
+            return;
+        
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             
@@ -31,6 +37,6 @@ class CreateUserPersonalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_personal');
+        Schema::dropIfExists($this->tableName);
     }
 }
