@@ -4,53 +4,48 @@
 
 <div class="container mt-5">
 	<div class="row">
-		<div class="col-12">
-			<div class="input-group mb-3">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Czego szukasz?">
-
-					<select class="form-control">
-						<option value="0" class="d-none" selected>Lokalizacja</option>
-						<option value="1">Dolnośląskie</option>
-						<option value="2">Kujawsko-Pomorskie</option>
-						<option value="3">Lubelskie</option>
-						<option value="4">Lubuskie</option>
-						<option value="5">Łódzkie</option>
-						<option value="6">Małopolskie</option>
-						<option value="7">Mazowieckie</option>
-						<option value="8">Opolskie</option>
-						<option value="9">Podkarpackie</option>
-						<option value="10">Podlaskie</option>
-						<option value="11">Pomorskie</option>
-						<option value="12">Śląskie</option>
-						<option value="13">Świętokrzyskie</option>
-						<option value="14">Warmińsko-Mazurskie</option>
-						<option value="15">Wielkopolskie</option>
-						<option value="16">Zachodniopomorskie</option>
-					</select>
-					<span class="input-group-append">
-						<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Szukaj</button>
-					</span>
+		@include('home.modules.main_searchbox')
+		
+		<div class="col-12 text-center">
+			<h2>Kategorie</h2>
+			
+			
+			<div class="row mt-3 justify-content-center align-items-center">
+				@for ($i = 1; $i <= 10; $i++)
+				<div class="col-4 col-md-3 col-lg-2 mb-3">
+					<a href="{{ route('pageOffersList') . '?cat=' .$i }}" class="none">
+						<div class="card card-body main-tile">
+							<i class="fab fa-accessible-icon fa-3x"></i>
+							<p class="lead">Kategoria {{ $i }}</p>
+						</div>
+					</a>
 				</div>
+				@endfor
 			</div>
 		</div>
-
+		
 		<div class="col-12 my-3">
 			<hr>
 		</div>
-
+		
 		<div class="col-12 text-center">
-			<h2>Kategorie</h2>
-
-
-			<div class="row mt-3">
-				@for ($i = 0; $i < 10; $i++)
-    				<div class="col-4 col-sm-3 col-md-2 mb-3">
-    					<div class="card card-body">
-    						<i class="fab fa-accessible-icon fa-3x"></i>
-    						<p class="lead">Kategoria {{ $i }}</p>
-    					</div>
-    				</div>
+			<h2>Ostatnio przeglądane</h2>
+			
+			
+			<div class="row mt-3 justify-content-center align-items-center">
+				@for ($i = 1; $i <= 10; $i++)
+				<div class="col-6 col-sm-4 col-md-3 mb-3">
+					<a href="{{ route('pageOfferItem', ['id'=> $i,'name'=>'dsadasda']) }}" class="none">
+						<div class="card main-tile">
+							<img style="height: 100%; width: 100%; display: block;" src="https://picsum.photos/400/400" alt="Card image">
+							<div class="card-body text-left">
+								<h6 class="card-subtitle mb-2">Kategoria {{ $i }}</h6>
+								<p class="lead">{{ rand(0, 10000) / 100 }} zł</p>
+								<p><small><i class="fas fa-map-marker-alt"></i> Wielkopolkie, Poznań</small></p>
+							</div>
+						</div>
+					</a>
+				</div>
 				@endfor
 			</div>
 		</div>
@@ -61,5 +56,9 @@
 @if(!Auth::user())
 @include('home.modules.auth_login')
 @endif
+
+<script src="{{ asset('assets/js/main/home.js') }}" charset="utf-8"></script>
+<script src="{{ asset('assets/js/utils/search.engine.js') }}" charset="utf-8"></script>
+
 
 @endsection

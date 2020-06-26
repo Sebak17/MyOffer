@@ -12,7 +12,7 @@
 		<ul class="navbar-nav nav align-items-center justify-content-end ml-auto">
 			@auth('web')
 			<li class="nav-item mr-5">
-				<a class="none text-white iconrotate90" href=""><i class="fas fa-plus"></i> Dodaj ogłoszenie</a>
+				<a class="none text-white iconrotate90" href="{{ route('pagePanelOfferAdd') }}"><i class="fas fa-plus"></i> Dodaj ogłoszenie</a>
 			</li>
 			<li class="nav-item dropdown mr-5">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="navbardrop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,7 +21,7 @@
 				
 				<div class="dropdown-menu" aria-labelledby="navbardrop">
 
-					<a class="dropdown-item" href="{{ route('home') }}">
+					<a class="dropdown-item" href="{{ route('pagePanelOffersList') }}">
 						<i class="fas fa-box-open"></i> Moje ogłoszenia
 					</a>
 
@@ -33,7 +33,7 @@
 
 					<div class="dropdown-divider"></div>
 
-					<a class="dropdown-item" href="{{ route('logout') }}">
+					<a class="dropdown-item" href="{{ route('pagePanelSettings') }}">
 						<i class="fas fa-cog"></i> Ustawienia
 					</a>
 
@@ -46,7 +46,7 @@
 			@else
 			<li class="nav-item mt-2">
 				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAuthLogin"><i class="fas fa-sign-in-alt"></i> Zaloguj</button>
-				<a class="none" href="{{ route('page_auth_register') }}">
+				<a class="none" href="{{ route('pageAuthRegister') }}">
 					<button type="button" class="btn btn-info"><i class="fas fa-globe-europe"></i> Zarejestruj</button>
 				</a>
 			</li>

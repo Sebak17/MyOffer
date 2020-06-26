@@ -1,3 +1,12 @@
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 a.none {
     text-decoration: none;
 }
@@ -14,7 +23,27 @@ footer a:hover {
     color: gray;
 }
 
-a.iconrotate90:hover .fas {
+.iconrotate90:hover .fas {
     transition: 0.9s;
     transform: rotate(90deg);
+}
+
+.main-tile {
+    color: var(--dark);
+}
+
+@media only screen and (max-width: 991px) {
+    img.avatar {
+        width: auto;
+        max-width: 30%;
+        height: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    img.avatar {
+        width: auto;
+        max-width: 50%;
+        height: auto;
+    }
 }
