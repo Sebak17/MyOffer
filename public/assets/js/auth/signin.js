@@ -35,7 +35,7 @@ function signIn() {
             }
         },
         error: function () {
-            showAlert(AlertType.ERROR, "Błąd podczas logowania!");
+            showAlert(AlertType.ERROR, "Błąd podczas logowania!", '#alertAuthLogin');
         }
     });
 }
