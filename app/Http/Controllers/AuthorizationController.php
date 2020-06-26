@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\UserHelper;
 use App\Rules\ValidEmail;
 use App\Rules\ValidPassword;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class AuthorizationController extends Controller
 {
@@ -34,27 +36,47 @@ class AuthorizationController extends Controller
         $response = array();
 
         if ($validator->fails()) {
-            $results['success'] = false;
-            $results['msg']     = $validator->errors()->first();
-            return response()->json($results);
+            $response['success'] = false;
+            $response['msg']     = $validator->errors()->first();
+            return response()->json($response);
         }
 
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
             $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            $results['msg'] = "Za dużo prób logowania! Poczekaj " . $this->limiter()->availableIn($this->throttleKey($request)) . " sekund!";
-            return response()->json($results);
+            $response['msg'] = "Za dużo prób logowania! Poczekaj " . $this->limiter()->availableIn($this->throttleKey($request)) . " sekund!";
+            return response()->json($response);
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        	$response['success'] = true;
+
+            if (auth()->user()->active == 0) {
+                UserHelper::addToHistory(
+                    auth()->user(),
+                    "AUTH",
+                    "Logowanie do konta... KONTO NIEAKTYWNE",
+                );
+
+                auth()->logout();
+
+                $response['success'] = false;
+                $response['msg']     = "Konto nie jest aktywowane!";
+            } else {
+                $response['success'] = true;
+
+                UserHelper::addToHistory(
+                    auth()->user(),
+                    "AUTH",
+                    "Logowanie do konta... SUKCES",
+                );
+            }
 
         } else {
             $this->incrementLoginAttempts($request);
 
-            $results['success'] = false;
-            $results['msg']     = "Dane logowania są niepoprawne!";
+            $response['success'] = false;
+            $response['msg']     = "Dane logowania są niepoprawne!";
         }
 
 		
