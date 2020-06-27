@@ -74,7 +74,7 @@ function changePassword() {
 		return;
 	}
 
-	if(mPasswordNew1 == mPasswordNew2) {
+	if(mPasswordNew1 != mPasswordNew2) {
 		showAlert(AlertType.ERROR, "Hasła się nie zgadzają!", '#alertChangePassword');
 		return;
 	}
