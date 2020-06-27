@@ -27,6 +27,17 @@
           </div>
         </div>
         
+        <hr>
+        <div class="row mt-3">
+          <div class="col text-center">
+            <a href="#"><i class="fas fa-bolt"></i> Aktywuj konto</a>
+          </div>
+          
+          <div class="col text-center">
+            <a href="#"><i class="fas fa-key"></i> Zresetuj hasło</a>
+          </div>
+          
+        </div>
       </div>
       
       <div class="modal-footer">

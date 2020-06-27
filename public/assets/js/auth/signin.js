@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    bindKeys();
+    bindKeysSignIn();
 });
 
-function bindKeys() {
+function bindKeysSignIn() {
     $("#btn_auth_login").click(function () {
         signIn();
     });
