@@ -18,8 +18,8 @@
 
         <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 		
-		<script src="{{ asset('assets/js/jquery-3.4.1.min.js') }}" charset="utf-8"></script>
-		<script src="{{ asset('assets/js/bootstrap-4.5.0.min.js') }}" charset="utf-8"></script>
+		<script src="{{ asset('assets/js/addons/jquery-3.4.1.min.js') }}" charset="utf-8"></script>
+		<script src="{{ asset('assets/js/addons/bootstrap-4.5.0.min.js') }}" charset="utf-8"></script>
 
 		<script src="{{ asset('assets/js/utils.js') }}" charset="utf-8"></script>
 
