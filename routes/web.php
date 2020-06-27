@@ -18,7 +18,7 @@ Route::get('/', 'HomeController@main')->name('home');
 Route::get('/oferta/{id}/{name}', 'HomeController@offer')->where('id', '[0-9]+')->name('pageOfferItem');
 Route::get('/oferty', 'HomeController@offers')->name('pageOffersList');
 
-Route::get('/rejestracja', 'HomeController@main')->name('pageAuthRegister');
+Route::get('/rejestracja', 'AuthorizationController@pageSignUp')->name('pageAuthRegister');
 Route::any('/wyloguj', 'AuthorizationController@logout')->name('logout');
 
 
