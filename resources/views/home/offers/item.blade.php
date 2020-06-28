@@ -17,24 +17,58 @@
 		<div class="col-12 mb-2">
 			<hr>
 		</div>
+
+		@if (isset($owner) && $owner)
+		<div class="col-12">
+			@if($offer->status == 'VERIFICATION')
+			<div class="alert alert-warning text-center"><i class="fas fa-circle-notch fa-spin"></i> Trwa weryfikacja oferty...</div>
+			@elseif($offer->status == 'BANNED')
+			<div class="alert alert-danger text-center"><i class="fas fa-exclamation-circle"></i> Oferta jest zablokowana!</div>
+			@elseif($offer->status == 'INVISIBLE')
+			<div class="alert alert-warning text-center"><i class="fas fa-eye-slash"></i> Oferta jest niewidoczna!</div>
+			@endif
+		</div>
+		@endif
 		
 		<div class="col-12 col-lg-8 mb-3">
-			<div class="w-100 text-center mb-3 bg-dark">
-				<img src="https://picsum.photos/600/400" alt="">
+			<div class="w-100 text-center mb-3 bg-dark" >
+				<div id="carouselMain" class="carousel slide" data-ride="carousel">
+					<ol class="carousel-indicators">
+						@for($i =0 ; $i < count($offer->images) ; $i++)
+						<li data-target="#carouselMain" data-slide-to="{{ $i }}" {{ $i == 0 ? 'class="active"' : '' }} ></li>
+						@endfor
+					</ol>
+					<div class="carousel-inner">
+						@for($i =0 ; $i < count($offer->images) ; $i++)
+						<div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+							<img src="/storage/offers_images/{{ $offer->images->get($i)->name }}" class="d-block w-100">
+						</div>
+						@endfor
+					</div>
+					<a class="carousel-control-prev" href="#carouselMain" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselMain" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
 			</div>
 			
 			<div class="card card-body mb-3">
-				<h4>TITLESDANA39O A39O82HN A43290</h4>
-				<h2 class="text-muted">{{ rand(0, 10000) / 100 }} zł</h2>
+				<h4><i class="far fa-star" id="btnFavouriteStatus" data-is-favourite="false"></i> {{ $offer->title }}</h4>
+				<h2 class="text-muted">{{ $offer->getTextPrice() }}</h2>
 			</div>
 			
 			<div class="card card-body mb-3">
 				<h5><i class="fas fa-clipboard-list"></i> Opis</h5>
+				<pre style="white-space:pre-wrap; font-family: auto;">{{ $offer->description }}</pre>
 			</div>
 			
 			<div class="card card-body">
 				<p class="mb-0">
-					Dodano: <strong>{{ date('H:i:s d-m-Y', time()) }}</strong>
+					Dodano: <strong>{{ $offer->created_at->format('d-m-Y H:i:s') }}</strong>
 				</p>
 			</div>
 		</div>
@@ -62,15 +96,17 @@
 					</div>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item" id="itemListPhone" style="display: none;"><i class="fas fa-phone"></i> +48 111 222 333</li>
-					<li class="list-group-item" id="itemListEmail" style="display: none;"><i class="fas fa-envelope"></i> mail@mail.mail</li>
+					<li class="list-group-item" id="itemListPhone" style="display: none;"><i class="fas fa-phone"></i> +48 {{ $offer->user->personal->phoneNumber }}</li>
+					<li class="list-group-item" id="itemListEmail" style="display: none;"><i class="fas fa-envelope"></i> {{ $offer->user->email }}</li>
 				</ul>
 			</div>
 			
 			<div class="card card-body mt-3">
 				<h5 class="card-title"><i class="fas fa-map-marker-alt"></i> Lokalizacja</h5>
 				
+				<p>{{ $offer->location }}</p>
 				<div id="mapid" style="height: 180px;"></div>
+
 			</div>
 		</div>
 	</div>

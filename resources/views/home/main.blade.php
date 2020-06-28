@@ -32,21 +32,23 @@
 			<h2>Ostatnio przeglądane</h2>
 			
 			
-			<div class="row mt-3 justify-content-center align-items-center">
-				@for ($i = 1; $i <= 10; $i++)
+			<div class="row mt-3 justify-content-center ">
+				@foreach ($offersHistory as $offer)
 				<div class="col-6 col-sm-4 col-md-3 mb-3">
-					<a href="{{ route('pageOfferItem', ['id'=> $i,'name'=>'dsadasda']) }}" class="none">
-						<div class="card main-tile">
-							<img style="height: 100%; width: 100%; display: block;" src="https://picsum.photos/400/400" alt="Card image">
+					<a href="{{ route('pageOfferItem', ['id'=> $offer->id,'name'=>$offer->generateURLName()]) }}" class="none">
+						<div class="card main-tile h-100">
+							<div style="height: 200px;" class="bg-dark w-100 py-4">
+								<img class="img-fluid" src="/storage/offers_images/{{ $offer->images->first()->name }}">
+							</div>
 							<div class="card-body text-left">
-								<h6 class="card-subtitle mb-2">Kategoria {{ $i }}</h6>
-								<p class="lead">{{ rand(0, 10000) / 100 }} zł</p>
-								<p><small><i class="fas fa-map-marker-alt"></i> Wielkopolkie, Poznań</small></p>
+								<h6 class="card-subtitle mb-2">{{ $offer->title }}</h6>
+								<p class="lead">{{ $offer->getTextPrice() }}</p>
+								<p><small><i class="fas fa-map-marker-alt"></i> {{ $offer->location }}</small></p>
 							</div>
 						</div>
 					</a>
 				</div>
-				@endfor
+				@endforeach
 			</div>
 		</div>
 	</div>

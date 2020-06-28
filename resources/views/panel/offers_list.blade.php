@@ -31,10 +31,10 @@
 					<td class="align-middle"><strong>{{ $offer->getTextPrice() }}</strong></td>
 					<td class="align-middle">{{ $offer->getTextStatus() }}</td>
 					<td class="align-middle">
-						<a href="#">
+						<a href="{{ route('pageOfferItem', ['id'=> $offer->id,'name'=>$offer->generateURLName()]) }}" class="none">
 							<button class="btn btn-primary btn-sm mt-2"><i class="fas fa-eye"></i></button>
 						</a>
-						<a href="#">
+						<a href="#" class="none">
 							<button class="btn btn-success btn-sm mt-2"><i class="fas fa-edit"></i></button>
 						</a>
 					</td>
