@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\OffersHelper;
+use App\Models\Category;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,8 @@ class HomeController extends Controller
 {
     public function main(Request $request)
     {
+
+        $categoriesMain = Category::where('active', 1)->where('visible', 1)->where('overcategory', 0)->orderBy('orderID', 'ASC')->get();
 
         $offersHistory = $request->session()->get('OFFERS_SEEN_HISTORY', []);
 
@@ -29,7 +32,9 @@ class HomeController extends Controller
             array_push($offersFromHistory, $offer);
         }
 
-        return view('home.main')->with('offersHistory', $offersFromHistory);
+        $offersLastAdded = Offer::where('status', 'VISIBLE')->orderBy('created_at','desc')->limit(10)->get();
+
+        return view('home.main')->with('categoriesMain', $categoriesMain)->with('offersHistory', $offersFromHistory)->with('offersLastAdded', $offersLastAdded);
     }
 
     public function offer(Request $request, $id, $name)
@@ -87,6 +92,8 @@ class HomeController extends Controller
 
     public function offers(Request $request)
     {
+
+        
         return view('home.offers.list');
     }
 
