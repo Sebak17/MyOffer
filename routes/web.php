@@ -36,16 +36,18 @@ Route::prefix('system')->group(function () {
 	Route::prefix('auth')->group(function () {
 		Route::post('signIn', 'AuthorizationController@signIn');
     	Route::post('signUp', 'AuthorizationController@signUp');
-	});;
+	});
 
 	Route::prefix('user')->middleware('auth:web')->group(function () {
 		Route::post('changePersonal', 'PanelSystem\UserController@changePersonal');
 		Route::post('changePassword', 'PanelSystem\UserController@changePassword');
-	});;
+	});
 
 	Route::prefix('panel')->middleware('auth:web')->group(function () {
+		Route::post('categoriesList', 'PanelSystem\GeneralController@categoriesList');
+
 		Route::post('offerImageUpload', 'PanelSystem\OffersController@offerImageUpload');
 		Route::post('offerImageRemove', 'PanelSystem\OffersController@offerImageRemove');
 		Route::post('offerAdd', 'PanelSystem\OffersController@addOffer');
-	});;
+	});
 });

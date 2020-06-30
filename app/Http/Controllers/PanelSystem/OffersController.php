@@ -123,11 +123,11 @@ class OffersController extends Controller
 
         $category = Category::where('id', $request->get('offer_category'))->first();
 
-        // if ($category == null) {
-        //     $response['success'] = false;
-        //     $response['msg']     = "Podana kategoria nie istnieje!";
-        //     return response()->json($response);
-        // }
+        if ($category == null) {
+            $response['success'] = false;
+            $response['msg']     = "Podana kategoria nie istnieje!";
+            return response()->json($response);
+        }
 
         $user = Auth::user();
 
@@ -138,7 +138,7 @@ class OffersController extends Controller
             'description' => $request->get('offer_description'),
             'price'       => $request->get('offer_price'),
             'location'    => $request->get('offer_location'),
-            'category_id' => $request->get('offer_category'),
+            'category_id' => $category->id,
         ]);
 
         foreach ($request->get('offer_images') as $imgHash) {

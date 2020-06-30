@@ -86,7 +86,11 @@
 			</div>
 			
 			<div class="modal-body">
-				<div></div>
+				<div>
+					<p class="text-center">Kategoria: <strong class="" id="modalCategoryOver">#</strong> <button class="btn btn-secondary btn-sm" id="btnModalCategoryOver"><i class="fas fa-level-up-alt"></i></button></p>
+					<ul class="list-group" id="modalCategoryList">
+					</ul>
+				</div>
 			</div>
 			
 			<div class="modal-footer">

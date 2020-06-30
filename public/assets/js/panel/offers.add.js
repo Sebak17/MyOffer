@@ -5,15 +5,19 @@ var inpOfferTitle,
 
 var valOfferTitle,
     valOfferDescription,
-    valOfferCategory = 1;
+    valOfferCategory = 0;
 
 const maxTitle = 80,
     maxDescription = 5000;
 
 var offerImagesList = [];
 
+var categoriesList = [];
+
 $(document).ready(function () {
     load();
+
+    loadCategories();
 
     bind();
 });
@@ -72,6 +76,25 @@ function bind() {
     $("#btnSelectCategory").click(function () {
         $("#modalCategorySelect").modal('show');
     });
+
+    $("#btnModalCategoryOver").click(function(event) {
+        selectCategoryOver();
+    });
+}
+
+function loadCategories() {
+    $.ajax({
+        url: "/system/panel/categoriesList",
+        method: "POST",
+        success: function (data) {
+            if (data.success != true)
+                return;
+
+            categoriesList = data.categories;
+
+            loadCategoriesModalByOver(0);
+        }
+    });
 }
 
 
@@ -128,7 +151,7 @@ function imageOfferUpload(input) {
                 });
 
                 refreshImagesList();
-            } else if (data.msg != null){
+            } else if (data.msg != null) {
                 showAlert(AlertType.ERROR, data.msg, '#alertOfferAdd');
             } else {
                 showAlert(AlertType.ERROR, "Błąd podczas usuwania zdjęcia!", '#alertOfferAdd');
@@ -184,4 +207,94 @@ function refreshImagesList() {
 
 
     $("#imagesList").html(text);
+}
+
+function selectCategory(id) {
+
+    if(id == 0) {
+        valOfferCategory = 0;
+
+        $("#modalCategoryOver").html("#");
+        $("#inpOfferCategory").val("Wybierz kategorie");
+        loadCategoriesModalByOver(0);
+        return;
+    }
+
+    let category = getCategoryById(id);
+    let subCategories = getCategoriesByOver(id);
+
+    if(category == null)
+        return;
+
+    let elementOld = $("[data-modal-category-item='" + valOfferCategory + "']");
+
+    if(elementOld != null && elementOld.hasClass('active'))
+        elementOld.removeClass('active');
+
+    $("#modalCategoryOver").html(category.name);
+    valOfferCategory = id;
+
+    // CATEGORY HAS SUB
+    if (subCategories.length > 0) {
+        $("#inpOfferCategory").val(category.name);
+        loadCategoriesModalByOver(valOfferCategory);
+    } else {
+        $("[data-modal-category-item='" + valOfferCategory + "']").addClass('active');
+        $("#inpOfferCategory").val(category.name);
+    }
+
+}
+
+function selectCategoryOver() {
+    let currentCategory = getCategoryById(valOfferCategory);
+
+    if(currentCategory == null)
+        return;
+
+    selectCategory(currentCategory.overcategory);
+}
+
+function loadCategoriesModalByOver(overcategory) {
+    let html = String.raw ``;
+
+    categoriesList.forEach(function (item, index) {
+
+        if (item.overcategory != overcategory)
+            return;
+
+        html += String.raw `
+            <li class="list-group-item list-group-item-action" data-modal-category-item="` + item.id + `">
+                <i class="fas ` + item.icon + `"></i> ` + item.name + `
+            </li>
+        `;
+    });
+
+    $("#modalCategoryList").html(html);
+
+
+    $("[data-modal-category-item]").each(function (index, el) {
+        $(el).click(function (event) {
+            let id = parseInt(el.getAttribute("data-modal-category-item"));
+            selectCategory(id);
+        });
+    });
+}
+
+function getCategoriesByOver(overcategory) {
+    return categoriesList.filter(function (category) {
+        if (category.overcategory == overcategory)
+            return true;
+        return false;
+    });
+}
+
+function getCategoryById(id) {
+    let cat = null;
+
+    categoriesList.forEach(function (item, index) {
+        if (item.id == id)
+            cat = item;
+    });
+
+    return cat;
 }
