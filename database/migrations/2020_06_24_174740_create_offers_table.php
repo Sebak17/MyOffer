@@ -29,7 +29,7 @@ class CreateOffersTable extends Migration
             $table->float('price', 8, 2);
 
             $table->string('title', 120);
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->text('location');
 
