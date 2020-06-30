@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Offer;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class OffersHelper
@@ -28,6 +29,27 @@ class OffersHelper
         }
 
         $request->session()->put('OFFERS_SEEN_HISTORY', $offersHistory);
+    }
+
+
+    public static function generateCategoryPathHTML($category_id) {
+        $categoryPath = "";
+        $currCategoryID = $category_id;
+
+        do {
+
+            $category = Category::where('id', $currCategoryID)->first();
+
+            $categoryPath = '<li class="breadcrumb-item"><a href="' . route('pageOffersList') . '?category=' . $currCategoryID . '">' . $category->name . '</a></li>' . $categoryPath;
+
+            $currCategoryID = $category->overcategory;
+
+        } while ($currCategoryID != 0);
+
+
+        $categoryPath = '<li class="breadcrumb-item"><a href="' . route('pageOffersList') . '"><i class="fas fa-home"></i></a></li>' . $categoryPath;
+
+        return $categoryPath;
     }
 
 }

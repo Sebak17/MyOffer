@@ -23,16 +23,18 @@ class HomeController extends Controller
 
             $offer = Offer::where('id', $id)->first();
 
-            if($offer == null)
+            if ($offer == null) {
                 continue;
+            }
 
-            if($offer->status != 'VISIBLE')
+            if ($offer->status != 'VISIBLE') {
                 continue;
+            }
 
             array_push($offersFromHistory, $offer);
         }
 
-        $offersLastAdded = Offer::where('status', 'VISIBLE')->orderBy('created_at','desc')->limit(10)->get();
+        $offersLastAdded = Offer::where('status', 'VISIBLE')->orderBy('created_at', 'desc')->limit(10)->get();
 
         return view('home.main')->with('categoriesMain', $categoriesMain)->with('offersHistory', $offersFromHistory)->with('offersLastAdded', $offersLastAdded);
     }
@@ -83,7 +85,9 @@ class HomeController extends Controller
 
             OffersHelper::addOfferToHistory($request, $offer);
 
-            return view('home.offers.item')->with('offer', $offer)->with('owner', true);
+            $categoryPath = OffersHelper::generateCategoryPathHTML($offer->category_id);
+
+            return view('home.offers.item')->with('offer', $offer)->with('categoryPath', $categoryPath)->with('owner', true);
         } else {
             return view('home.offers.not_found');
         }
