@@ -47,3 +47,9 @@ footer a:hover {
         height: auto;
     }
 }
+
+div.main-tile-image {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
