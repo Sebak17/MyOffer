@@ -13,7 +13,7 @@
 			<div class="row mt-3 justify-content-center align-items-center">
 				@foreach ($categoriesMain as $category)
 				<div class="col-4 col-md-3 col-lg-2 mb-3">
-					<a href="{{ route('pageOffersList') . '?cat=' .$category->id }}" class="none">
+					<a href="{{ route('pageOffersList') . '?category=' .$category->id }}" class="none">
 						<div class="card card-body main-tile">
 							<i class="fas {{ $category->icon }} fa-3x"></i>
 							<p class="lead">{{ $category->name }}</p>
