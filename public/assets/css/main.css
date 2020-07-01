@@ -53,3 +53,38 @@ div.main-tile-image {
     background-position: center;
     background-size: cover;
 }
+
+/*  CATEGORY  */
+
+.main-category-item {
+    font-size: 150%;
+}
+
+.category-item {
+    padding: 3px;
+}
+
+.category-item:hover {
+    background: #2196F3;
+    color: white;
+    transition: 0.15s ease-in-out;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+#categoryBack {
+    text-decoration: none;
+    color: #2196F3;
+}
+
+#categoryBack:hover {
+    background: #2196F3;
+    color: white;
+    transition: 0.15s ease-in-out;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.category-item-back {
+    padding: 3px;
+}

@@ -25,7 +25,7 @@ function searchProducts() {
 	let district = "", inpDistrict = $("#inpSearchDistrict").val();
 
 	if(inpDistrict > 0)
-		district = "&loc=" + inpDistrict;
+		district = "&locd=" + inpDistrict;
 
 	window.location.href = "/oferty?s=" + encodeURIComponent(val) + district;
 }
