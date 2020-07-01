@@ -31,7 +31,8 @@ class CreateOffersTable extends Migration
             $table->string('title', 120);
             $table->text('description')->nullable();
 
-            $table->text('location');
+            $table->integer('loc_district');
+            $table->text('loc_city');
 
             $table->timestamps();
 

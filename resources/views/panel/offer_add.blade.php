@@ -37,11 +37,31 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div class="form-group row">
 			<label for="inpOfferLocation" class="col-sm-2 col-form-label"><i class="fas fa-map-marker-alt"></i> Lokalizacja</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="inpOfferLocation" placeholder="Podaj miejsce oferty">
+			<div class="col-sm-10 input-group">
+				
+				<select id="inpOfferLocDistrict" class="form-control">
+					<option value="-1" class="d-none" selected>Wybierz województwo</option>
+					<option value="1">Dolnośląskie</option>
+					<option value="2">Kujawsko-Pomorskie</option>
+					<option value="3">Lubelskie</option>
+					<option value="4">Lubuskie</option>
+					<option value="5">Łódzkie</option>
+					<option value="6">Małopolskie</option>
+					<option value="7">Mazowieckie</option>
+					<option value="8">Opolskie</option>
+					<option value="9">Podkarpackie</option>
+					<option value="10">Podlaskie</option>
+					<option value="11">Pomorskie</option>
+					<option value="12">Śląskie</option>
+					<option value="13">Świętokrzyskie</option>
+					<option value="14">Warmińsko-Mazurskie</option>
+					<option value="15">Wielkopolskie</option>
+					<option value="16">Zachodniopomorskie</option>
+				</select>
+				<input type="text" class="form-control" id="inpOfferLocCity" placeholder="Podaj miasto oferty">
 			</div>
 		</div>
 		

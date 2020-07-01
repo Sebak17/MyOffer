@@ -43,7 +43,7 @@
 							<div class="card-body text-left">
 								<h6 class="card-subtitle mb-2">{{ $offer->title }}</h6>
 								<p class="lead">{{ $offer->getTextPrice() }}</p>
-								<p><small><i class="fas fa-map-marker-alt"></i> {{ $offer->location }}</small></p>
+								<p><small><i class="fas fa-map-marker-alt"></i> {{ $offer->loc_city }}</small></p>
 							</div>
 						</div>
 					</a>
@@ -71,7 +71,7 @@
 							<div class="card-body text-left">
 								<h6 class="card-subtitle mb-2">{{ $offer->title }}</h6>
 								<p class="lead">{{ $offer->getTextPrice() }}</p>
-								<p><small><i class="fas fa-map-marker-alt"></i> {{ $offer->location }}</small></p>
+								<p><small><i class="fas fa-map-marker-alt"></i> {{ $offer->loc_city }}</small></p>
 							</div>
 						</div>
 					</a>

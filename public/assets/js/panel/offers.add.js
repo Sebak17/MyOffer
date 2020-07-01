@@ -102,6 +102,9 @@ function addOffer() {
     let mOfferPrice = $("#inpOfferPrice").val();
     let mOfferLocation = $("#inpOfferLocation").val();
 
+    let mOfferLocDistrict = $("#inpOfferLocDistrict").val();
+    let mOfferLocCity = $("#inpOfferLocCity").val();
+
     showAlert(AlertType.LOADING, "Dodawanie oferty...", "#alertOfferAdd");
 
     $.ajax({
@@ -111,7 +114,8 @@ function addOffer() {
             offer_title: valOfferTitle,
             offer_description: valOfferDescription,
             offer_price: mOfferPrice,
-            offer_location: mOfferLocation,
+            offer_loc_city: mOfferLocCity,
+            offer_loc_district: mOfferLocDistrict,
             offer_category: valOfferCategory,
             offer_images: offerImagesList,
         },

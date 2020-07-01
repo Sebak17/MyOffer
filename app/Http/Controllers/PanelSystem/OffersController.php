@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Offer;
 use App\Models\OfferImage;
+use App\Rules\ValidCity;
+use App\Rules\ValidDistrict;
 use App\Rules\ValidOfferCategory;
 use App\Rules\ValidOfferDescription;
 use App\Rules\ValidOfferImagesList;
-use App\Rules\ValidOfferLocation;
 use App\Rules\ValidOfferPrice;
 use App\Rules\ValidOfferTitle;
 use Illuminate\Http\Request;
@@ -105,12 +106,13 @@ class OffersController extends Controller
     public function addOffer(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'offer_title'       => new ValidOfferTitle,
-            'offer_description' => new ValidOfferDescription,
-            'offer_price'       => new ValidOfferPrice,
-            'offer_location'    => new ValidOfferLocation,
-            'offer_category'    => new ValidOfferCategory,
-            'offer_images'      => new ValidOfferImagesList,
+            'offer_title'        => new ValidOfferTitle,
+            'offer_description'  => new ValidOfferDescription,
+            'offer_price'        => new ValidOfferPrice,
+            'offer_loc_city'     => new ValidCity,
+            'offer_loc_district' => new ValidDistrict,
+            'offer_category'     => new ValidOfferCategory,
+            'offer_images'       => new ValidOfferImagesList,
         ]);
 
         $response = array();
@@ -137,7 +139,8 @@ class OffersController extends Controller
             'title'       => $request->get('offer_title'),
             'description' => $request->get('offer_description'),
             'price'       => $request->get('offer_price'),
-            'location'    => $request->get('offer_location'),
+            'loc_city'    => $request->get('offer_loc_city'),
+            'loc_district'    => $request->get('offer_loc_district'),
             'category_id' => $category->id,
         ]);
 
@@ -154,14 +157,14 @@ class OffersController extends Controller
             Storage::move("public/tmp_images/" . $imgHash, "public/offers_images/" . $imgHash);
         }
 
-
         foreach (OfferImage::where('user_id', $user->id)->whereNull('offer_id')->get() as $image) {
-            
+
             $image->forceDelete();
 
             if (Storage::exists("public/tmp_images/" . $image->name)) {
                 Storage::delete("public/tmp_images/" . $image->name);
             }
+
         }
 
         $response['success'] = true;
