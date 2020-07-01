@@ -38,7 +38,7 @@
 					<a href="{{ route('pageOfferItem', ['id'=> $offer->id,'name'=>$offer->generateURLName()]) }}" class="none">
 						<div class="card main-tile h-100">
 							<div style="height: 200px;" class="bg-dark w-100 py-4">
-								<div class="w-100 h-100 main-tile-image" style="background-image: url('/storage/offers_images/{{ $offer->images->first()->name }}')"></div>
+								<div class="w-100 h-100 main-tile-image" style="background-image: url('/storage/offers_images/{{  $offer->getFirstImageName() }}')"></div>
 							</div>
 							<div class="card-body text-left">
 								<h6 class="card-subtitle mb-2">{{ $offer->title }}</h6>
@@ -66,7 +66,7 @@
 					<a href="{{ route('pageOfferItem', ['id'=> $offer->id,'name'=>$offer->generateURLName()]) }}" class="none">
 						<div class="card main-tile h-100">
 							<div style="height: 200px;" class="bg-dark w-100 py-4">
-								<div class="w-100 h-100 main-tile-image" style="background-image: url('/storage/offers_images/{{ $offer->images->first()->name }}')"></div>
+								<div class="w-100 h-100 main-tile-image" style="background-image: url('/storage/offers_images/{{  $offer->getFirstImageName() }}')"></div>
 							</div>
 							<div class="card-body text-left">
 								<h6 class="card-subtitle mb-2">{{ $offer->title }}</h6>

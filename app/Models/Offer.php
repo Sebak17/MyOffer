@@ -35,6 +35,13 @@ class Offer extends Model
         return \App\Models\Category::where('id', $this->category_id)->first();
     }
 
+    public function getFirstImageName() {
+        if(count($this->images) == 0)
+            return null;
+
+        return $this->images->first()->name;
+    }
+
     public function getTextStatus()
     {
         switch ($this->status) {

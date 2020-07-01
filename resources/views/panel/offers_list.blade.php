@@ -25,7 +25,7 @@
 				@foreach($offers as $offer)
 				<tr>
 					<td class="align-middle" style="width: 200px; height: 150px;">
-						<img class="img-thumbnail"  src="/storage/offers_images/{{ $offer->images->first()->name }}" alt="">
+						<img class="img-thumbnail"  src="/storage/offers_images/{{ $offer->getFirstImageName() }}" alt="">
 					</td>
 					<td class="align-middle">{{ $offer->title }}</td>
 					<td class="align-middle"><strong>{{ $offer->getTextPrice() }}</strong></td>
