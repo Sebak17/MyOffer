@@ -36,6 +36,8 @@ class HomeController extends Controller
             array_push($offersFromHistory, $offer);
         }
 
+        $offersFromHistory = array_reverse($offersFromHistory);
+
         $offersLastAdded = Offer::where('status', 'VISIBLE')->orderBy('created_at', 'desc')->limit(10)->get();
 
         return view('home.main')->with('categoriesMain', $categoriesMain)->with('offersHistory', $offersFromHistory)->with('offersLastAdded', $offersLastAdded);
