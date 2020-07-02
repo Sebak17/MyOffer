@@ -31,6 +31,14 @@
 					<li class="nav-item w-100"><hr class="border-top"></li>
 
 					<li class="nav-item">
+						<a class="nav-link" href="{{ route('pagePanelFavoritesList') }}">
+							<i class="fas fa-star fa-1x"></i> Obserwowane
+						</a>
+					</li>
+
+					<li class="nav-item w-100"><hr class="border-top"></li>
+
+					<li class="nav-item">
 						<a class="nav-link" href="{{ route('pagePanelSettings') }}">
 							<i class="fas fa-cog fa-1x"></i> Ustawienia
 						</a>

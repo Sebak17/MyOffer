@@ -27,7 +27,7 @@
 
 					<div class="dropdown-divider"></div>
 
-					<a class="dropdown-item" href="{{ route('home') }}">
+					<a class="dropdown-item" href="{{ route('pagePanelFavoritesList') }}">
 						<i class="fas fa-star"></i> Obserwowane
 					</a>
 

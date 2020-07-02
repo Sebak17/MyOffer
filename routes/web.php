@@ -25,8 +25,9 @@ Route::any('/wyloguj', 'AuthorizationController@logout')->name('logout');
 Route::prefix('panel')->middleware('auth:web')->group(function () {
 
     Route::get('/dodaj_ogloszenie', 'PanelController@offer_add')->name('pagePanelOfferAdd');
-
     Route::get('/moje_ogloszenia', 'PanelController@offers_list')->name('pagePanelOffersList');
+
+    Route::get('/obserwowane', 'PanelController@favorites_list')->name('pagePanelFavoritesList');
 
     Route::get('/ustawienia', 'PanelController@settings')->name('pagePanelSettings');
 });
