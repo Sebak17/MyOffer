@@ -2,16 +2,12 @@
 
 @section('content')
 
-<div class="container mt-5">
+<div class="container mt-5" data-id="{{ $offer->id }}">
 	<div class="row">
 		@include('home.modules.main_searchbox')
 		
 		<div class="col-12">
 			<ol class="breadcrumb">
-<!-- 				<li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-				<li class="breadcrumb-item"><a href="#">Library</a></li>
-				<li class="breadcrumb-item active">Data</li>
- -->
 				{!! $categoryPath !!}
 			</ol>
 		</div>
@@ -59,7 +55,7 @@
 			</div>
 			
 			<div class="card card-body mb-3">
-				<h4><i class="far fa-star" id="btnFavouriteStatus" data-is-favourite="false"></i> {{ $offer->title }}</h4>
+				<h4><i class="fa{{ ($isFavorite ? 's' : 'r') }} fa-star" id="btnFavouriteStatus" data-is-favourite="{{ $isFavorite }}"></i> {{ $offer->title }}</h4>
 				<h2 class="text-muted">{{ $offer->getTextPrice() }}</h2>
 			</div>
 			

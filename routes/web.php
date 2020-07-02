@@ -42,6 +42,8 @@ Route::prefix('system')->group(function () {
 		Route::post('changeAvatar', 'PanelSystem\UserController@changeAvatar');
 		Route::post('changePersonal', 'PanelSystem\UserController@changePersonal');
 		Route::post('changePassword', 'PanelSystem\UserController@changePassword');
+		
+		Route::post('changeFavoriteStatus', 'PanelSystem\UserController@changeFavoriteStatus');
 	});
 
 	Route::prefix('panel')->middleware('auth:web')->group(function () {

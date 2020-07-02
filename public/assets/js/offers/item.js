@@ -1,3 +1,5 @@
+var changingFavorite = false;
+
 $(document).ready(function() {
 	bind();
 });
@@ -20,22 +22,42 @@ function bind() {
 	});
 
 	$("#btnFavouriteStatus").click(function() {
-		changeFavouriteStatus();
+		changeFavoriteStatus();
 	});
 }
 
-function changeFavouriteStatus() {
-	let element = $("#btnFavouriteStatus");
+function changeFavoriteStatus() {
 
-	let isFavourite = (element.attr('data-is-favourite') == 'true');
+    if(changingFavorite)
+        return;
 
-	if(isFavourite) {
-		element.removeClass('fas');
-		element.addClass('far');
-		element.attr('data-is-favourite', 'false');
-	} else {
-		element.removeClass('far');
-		element.addClass('fas');
-		element.attr('data-is-favourite', 'true');
-	}
+    changingFavorite = true;
+
+    $.ajax({
+        url: "/system/user/changeFavoriteStatus",
+        method: "POST",
+        data: {
+            id: $("[data-id]").attr("data-id"),
+        },
+        success: function (data) {
+            if (data.success == true) {
+                let o = $("[data-is-favourite]");
+
+                if (!data.status) {
+                    o.removeClass('fas')
+                    o.addClass('far');
+                    o.attr("data-is-favourite", false);
+                } else {
+                    o.removeClass('far')
+                    o.addClass('fas');
+                    o.attr("data-is-favourite", true);
+                }
+            }
+        },
+        error: function () {},
+        complete: function() {
+            changingFavorite = false;
+        }
+    });
+
 }

@@ -58,6 +58,8 @@ class HomeController extends Controller
         $haveAccess = false;
         $isOwner    = false;
 
+        $isFavorite = false;
+
         if (Auth::user()) {
 
             $user = Auth::user();
@@ -75,6 +77,14 @@ class HomeController extends Controller
                 $isOwner    = true;
             }
 
+
+            $favs = json_decode($user->getFavorites()->offers, true);
+
+            if (in_array($id, $favs)) {
+                $isFavorite = true;
+            }
+
+
         } else {
 
             if ($offer->status != 'VISIBLE') {
@@ -91,7 +101,10 @@ class HomeController extends Controller
 
             $categoryPath = OffersHelper::generateCategoryPathHTML($offer->category_id);
 
-            return view('home.offers.item')->with('offer', $offer)->with('categoryPath', $categoryPath)->with('owner', true);
+            return view('home.offers.item')->with('offer', $offer)
+                                           ->with('categoryPath', $categoryPath)
+                                           ->with('owner', $isOwner)
+                                           ->with('isFavorite', $isFavorite);
         } else {
             return view('home.offers.not_found');
         }

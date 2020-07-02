@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'active', 'avatar'
+        'email', 'password', 'active', 'avatar',
     ];
 
     /**
@@ -36,7 +35,7 @@ class User extends Authenticatable
     protected $casts = [
     ];
 
-    public function history() 
+    public function history()
     {
         return $this->hasMany('App\Models\UserHistory');
     }
@@ -51,11 +50,34 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserSystem');
     }
 
-    public function getAvatarURL() {
-        if($this->avatar == null)
+    public function favorites()
+    {
+        return $this->hasOne('App\Models\UserFavorites');
+    }
+
+    public function getAvatarURL()
+    {
+
+        if ($this->avatar == null) {
             return "/assets/img/avatar_1.png";
-        else
+        } else {
             return "/storage/avatars/" . $this->avatar;
+        }
 
     }
+
+    public function getFavorites()
+    {
+        $fav = $this->favorites;
+
+        if ($fav == null) {
+            $fav = \App\Models\UserFavorites::create([
+                'user_id'  => $this->id,
+                'offers' => json_encode([]),
+            ]);
+        }
+
+        return $fav;
+    }
+
 }
