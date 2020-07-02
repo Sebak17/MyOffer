@@ -9,22 +9,14 @@
 			<nav class="navbar bg-light">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="http://myshop2.local/panel">
-							<i class="fas fa-solar-panel"></i> Panel główny
+						<a class="nav-link" href="{{ route('pagePanelOffersList') }}">
+							<i class="fas fa-list"></i> Lista moich ofert
 						</a>
 					</li>
-
-					<li class="nav-item w-100"><hr class="border-top"></li>
-
+					
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('pagePanelOfferAdd') }}">
 							<i class="fas fa-plus-circle"></i> Dodaj ofertę
-						</a>
-					</li>
-
-					<li class="nav-item">
-						<a class="nav-link" href="{{ route('pagePanelOffersList') }}">
-							<i class="fas fa-list"></i> Lista moich ofert
 						</a>
 					</li>
 

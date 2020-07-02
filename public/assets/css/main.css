@@ -88,3 +88,21 @@ div.main-tile-image {
 .category-item-back {
     padding: 3px;
 }
+
+/*  STICKY FOOTER  */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 240px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+}
