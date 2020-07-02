@@ -80,11 +80,11 @@
 				<div class="card-body">
 					<h5 class="card-title"><i class="fas fa-user"></i> Użytkownik</h5>
 					<div class="w-100 text-center">
-						<img class="avatar rounded-circle" src="https://i.pravatar.cc/300"/>
+						<div class="avatar rounded-circle bg-dark mx-auto main-tile-image" style="width: 140px; height: 140px; background-image: url('{{ Auth::user()->getAvatarURL() }}')"></div>
 					</div>
 					
 					<div class="w-100 text-center mt-2">
-						<h6>John</h6>
+						<h6>{{ $offer->user->personal->firstname }}</h6>
 					</div>
 					
 					<div class="row">

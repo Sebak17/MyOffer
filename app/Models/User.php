@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'active'
+        'email', 'password', 'active', 'avatar'
     ];
 
     /**
@@ -49,5 +49,13 @@ class User extends Authenticatable
     public function system()
     {
         return $this->hasOne('App\Models\UserSystem');
+    }
+
+    public function getAvatarURL() {
+        if($this->avatar == null)
+            return "/assets/img/avatar_1.png";
+        else
+            return "/storage/avatars/" . $this->avatar;
+
     }
 }

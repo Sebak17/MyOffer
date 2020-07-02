@@ -9,9 +9,43 @@ use App\Rules\ValidPhoneNumber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
+    public function changeAvatar(Request $request) 
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'mimes:png,jpeg|max:5000',
+        ]);
+
+        $response = array();
+
+        if ($validator->fails()) {
+            $response['success'] = false;
+            $response['msg']     = $validator->errors()->first();
+            return response()->json($response);
+        }
+
+        $user = Auth::user();
+
+        if ($user->avatar != null && Storage::exists("public/avatars/" . $user->avatar)) {
+            Storage::delete("public/avatars/" . $user->avatar);
+        }
+
+        $file = $request->file('image');
+
+        $ar = explode("/", $file->store('public/avatars'));
+        $hash = end($ar);
+
+
+        $user->avatar = $hash;
+        $user->save();
+
+        $response['success'] = true;
+        return response()->json($response);
+    }
 
     public function changePersonal(Request $request)
     {
@@ -29,6 +63,8 @@ class UserController extends Controller
         }
 
         $user = Auth::user();
+
+        // TODO
 
         $response['success'] = true;
         return response()->json($response);
@@ -51,8 +87,12 @@ class UserController extends Controller
 
         $user = Auth::user();
 
+        // TODO
+
         $response['success'] = true;
         return response()->json($response);
     }
+
+
 
 }

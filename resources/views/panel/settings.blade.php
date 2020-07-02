@@ -9,14 +9,17 @@
 
 <div class="row">
 	<div class="col-12 mb-3">
+
+		<div class="alert d-none" id="alertAvatarChange"></div>
+
 		<div class="card card-body">
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="w-100 text-center">
-						<img class="avatar rounded-circle" src="https://i.pravatar.cc/300"/>
-						<a href="#">
-							<h6 class="text-muted mt-3">Zmień awatar</h6>
-						</a>
+						<div class="avatar rounded-circle bg-dark mx-auto main-tile-image" style="width: 140px; height: 140px; background-image: url('{{ Auth::user()->getAvatarURL() }}')"></div>
+						<br>
+						<input type="file" class="d-none" id="inpUserAvatar" accept="image/x-png,image/jpeg">
+						<button class="btn btn-outline-info mt-3 mx-auto" id="btnUploadAvatar" data-placement="top" data-content="">Zmień awatar</button>
 					</div>
 				</div>
 				<div class="col-sm-9">
@@ -44,7 +47,7 @@
 					<input id="inpChanePersonalFirstname" type="text" placeholder="Podaj imię" class="form-control" value="">
 				</div>
 			</div>
-
+			
 			<div class="form-group">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
@@ -63,7 +66,7 @@
 		<div class="card card-body">
 			<legend><i class="fas fa-key"></i> Zmień hasło</legend>
 			<hr />
-
+			
 			<div class="alert d-none" id="alertChangePassword"></div>
 			
 			<div class="form-group">
@@ -74,7 +77,7 @@
 					<input id="inpChangePasswordOld" type="password" placeholder="Podaj stare hasło" class="form-control">
 				</div>
 			</div>
-
+			
 			<div class="form-group">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
@@ -83,7 +86,7 @@
 					<input id="inpChangePasswordNew1" type="password" placeholder="Podaj nowe hasło" class="form-control">
 				</div>
 			</div>
-
+			
 			<div class="form-group">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">

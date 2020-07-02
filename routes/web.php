@@ -39,6 +39,7 @@ Route::prefix('system')->group(function () {
 	});
 
 	Route::prefix('user')->middleware('auth:web')->group(function () {
+		Route::post('changeAvatar', 'PanelSystem\UserController@changeAvatar');
 		Route::post('changePersonal', 'PanelSystem\UserController@changePersonal');
 		Route::post('changePassword', 'PanelSystem\UserController@changePassword');
 	});

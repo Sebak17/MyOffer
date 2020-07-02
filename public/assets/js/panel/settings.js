@@ -3,11 +3,52 @@ $(document).ready(function () {
 });
 
 function bindKeys() {
+
+    $("#btnUploadAvatar").click(function (event) {
+        $("#inpUserAvatar").trigger('click');
+    });
+
+    $("#inpUserAvatar").change(function (event) {
+        if (this.files && this.files.length  == 1) {
+            avatarUpload(this);
+        }
+    });
+
     $("#btnChangePersonal").click(function () {
         changePersonal();
     });
     $("#btnChangePassword").click(function () {
         changePassword();
+    });
+
+     $("#btnChangePassword").click(function () {
+        changePassword();
+    });
+}
+
+function avatarUpload(input) {
+    let formData = new FormData();
+    formData.append('image', input.files[0]);
+
+    $.ajax({
+        url: "/system/user/changeAvatar",
+        method: "POST",
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data.success == true) {
+                location.reload();
+            } else if (data.msg != null) {
+                showAlert(AlertType.ERROR, data.msg, '#alertAvatarChange');
+            } else {
+                showAlert(AlertType.ERROR, "Błąd podczas dodawania zdjęcia!", '#alertAvatarChange');
+            }
+        },
+        error: function () {
+            showAlert(AlertType.ERROR, "Błąd podczas dodawania zdjęcia!", '#alertAvatarChange');  
+        }
     });
 }
 
@@ -102,5 +143,4 @@ function changePassword() {
             showAlert(AlertType.ERROR, "Błąd podczas zmiany!", '#alertChangePassword');
         }
     });
-
 }
