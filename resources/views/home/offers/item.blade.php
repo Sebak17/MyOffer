@@ -76,7 +76,7 @@
 				<div class="card-body">
 					<h5 class="card-title"><i class="fas fa-user"></i> Użytkownik</h5>
 					<div class="w-100 text-center">
-						<div class="avatar rounded-circle bg-dark mx-auto main-tile-image" style="width: 140px; height: 140px; background-image: url('{{ Auth::user()->getAvatarURL() }}')"></div>
+						<div class="avatar rounded-circle bg-dark mx-auto main-tile-image" style="width: 140px; height: 140px; background-image: url('{{ $offer->user->getAvatarURL() }}')"></div>
 					</div>
 					
 					<div class="w-100 text-center mt-2">
