@@ -39,7 +39,7 @@
 					<div class="carousel-inner">
 						@for($i =0 ; $i < count($offer->images) ; $i++)
 						<div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
-							<img src="/storage/offers_images/{{ $offer->images->get($i)->name }}" class="d-block w-100">
+							<img src="/storage/offers_images/{{ $offer->images->get($i)->name }}" class="d-block w-100 mx-auto">
 						</div>
 						@endfor
 					</div>

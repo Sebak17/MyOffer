@@ -106,3 +106,13 @@ body {
     width: 100%;
     height: 200px;
 }
+
+/* Fix diffrent size for images at carousel */
+
+@media (min-width: 576px) {
+    .carousel-item img {
+        width: auto !important;
+        height: 400px;
+        max-height: 400px;
+    }
+}
