@@ -6,8 +6,8 @@
 		
 		<title>{{ config('app.name') }}</title>
 
-		<meta name="author" content="SitePoint">
-		<meta name="description" content="The HTML5 Herald">
+		<meta name="author" content="Sebastian Krysa">
+		<meta name="description" content="Twoje oferty online">
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		
