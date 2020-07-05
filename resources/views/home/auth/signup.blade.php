@@ -104,9 +104,7 @@
 </div>
 
 
-@if(!Auth::user())
 @include('home.modules.auth_login')
-@endif
 
 <script src="{{ asset('assets/js/validation.js') }}" charset="utf-8"></script>
 <script src="{{ asset('assets/js/auth/signup.js') }}" charset="utf-8"></script>

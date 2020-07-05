@@ -1,3 +1,4 @@
+@if(!Auth::user())
 <div class="modal fade" id="modalAuthLogin">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -50,3 +51,4 @@
 
 
 <script src="{{ asset('assets/js/auth/signin.js') }}" charset="utf-8"></script>
+@endif

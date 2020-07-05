@@ -163,9 +163,7 @@
 </div>
 
 
-@if(!Auth::user())
 @include('home.modules.auth_login')
-@endif
 
 <script src="{{ asset('assets/js/utils/search.engine.js') }}" charset="utf-8"></script>
 <script src="{{ asset('assets/js/offers/list.js') }}" charset="utf-8"></script>
