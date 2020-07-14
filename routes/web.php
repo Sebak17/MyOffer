@@ -32,6 +32,17 @@ Route::prefix('panel')->middleware('auth:web')->group(function () {
     Route::get('/ustawienia', 'PanelController@settings')->name('pagePanelSettings');
 });
 
+
+
+Route::prefix('admin')->group(function () {
+
+	Route::get('/nieautoryzowany', 'AdminAuthController@not_authorized')->name('pageAdminNotAuth');
+	Route::get('/logowanie', 'AdminAuthController@auth_signin')->name('pageAdminSignIn');
+	Route::any('/wyloguj', 'AdminSystem\AuthController@logout')->name('logoutAdmin');
+
+	Route::get('/panel', 'AdminPanelController@panel')->name('pageAdminDashboard');
+});
+
 Route::prefix('system')->group(function () {
 
 	Route::prefix('auth')->group(function () {
