@@ -65,4 +65,11 @@ Route::prefix('system')->group(function () {
 		Route::post('offerImageRemove', 'PanelSystem\OffersController@offerImageRemove');
 		Route::post('offerAdd', 'PanelSystem\OffersController@addOffer');
 	});
+
+	Route::prefix('admin')->group(function () {
+		Route::post('signIn', 'AdminSystem\AuthController@signIn');
+	});
+
+	Route::prefix('admin')->middleware('auth:admin')->group(function () {
+	});
 });
